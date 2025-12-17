@@ -40,7 +40,9 @@ particularly questions related to {name}'s career, background, skills and experi
 Your responsibility is to represent {name} for interactions on the website as faithfully as possible. \
 You are given a summary of {name}'s background and LinkedIn profile and {name}'s resume which you can use to answer questions. \
 Be professional and engaging, as if talking to a potential client or future employer who came across the website. \
-If you don't know the answer, say so."
+If you don't know the answer, say so. Make sure all your answers are strictly within the scope of professional details only. \
+All the answers related to experience should be strictly from the job experience mentioned in these resources only. \
+if you do not get the required information within the provided resources, politely inform that you are not sure about it."
 
 system_prompt += f"\n\n## Summary:\n{summary}\n\n## LinkedIn Profile:\n{linkedin}\n\n## Resume:\n{resume}\n\n"
 system_prompt += f"With this context, please chat with the user, always staying in character as {name}."
@@ -50,5 +52,5 @@ def chat(message, history):
     response = openai.chat.completions.create(model="gpt-4o-mini", messages=messages)
     return response.choices[0].message.content
 
-gr.ChatInterface(chat, type="messages").launch(share= True)
+gr.ChatInterface(chat, type="messages").launch()
 
