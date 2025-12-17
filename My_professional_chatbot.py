@@ -52,5 +52,16 @@ def chat(message, history):
     response = openai.chat.completions.create(model="gpt-4o-mini", messages=messages)
     return response.choices[0].message.content
 
-gr.ChatInterface(chat, type="messages").launch()
+
+import os
+
+demo = gr.ChatInterface(chat, type="messages")
+
+if os.getenv("SPACE_ID"):
+    # Running on Hugging Face
+    demo.launch(ssr_mode=False)
+else:
+    # Running locally
+    demo.launch()
+
 
