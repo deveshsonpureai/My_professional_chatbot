@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 from pypdf import PdfReader
 import gradio as gr
-
+import os
 
 # Load environment variables, overwriting any existing ones
 load_dotenv(override=True)
@@ -53,15 +53,14 @@ def chat(message, history):
     return response.choices[0].message.content
 
 
-import os
 
-demo = gr.ChatInterface(chat, type="messages")
+
+with gr.Blocks(queue=False) as demo:
+    gr.ChatInterface(chat, type="messages")
 
 if os.getenv("SPACE_ID"):
-    # Running on Hugging Face
-    demo.launch(ssr_mode=False)
+    demo.launch()
 else:
-    # Running locally
     demo.launch()
 
 
