@@ -54,13 +54,7 @@ def chat(message, history):
 
 
 
-
-with gr.Blocks(queue=False) as demo:
-    gr.ChatInterface(chat, type="messages")
-
-if os.getenv("SPACE_ID"):
-    demo.launch()
-else:
-    demo.launch()
+demo = gr.ChatInterface(chat, type="messages")
+demo.launch()
 
 
