@@ -55,6 +55,4 @@ def chat(message, history):
 
 
 demo = gr.ChatInterface(chat, type="messages")
-demo.launch()
-
-
+demo.queue(api_open=True).launch()
